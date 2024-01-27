@@ -27,40 +27,30 @@ const Page = () => {
 
   const router = useRouter();
 
-  const { data } = trpc.anyApiRoute.useQuery();
-  console.log(data);
-  
-  //   const { mutate, isLoading } =
-  // trpc.auth.createPayloadUser.useMutation({
-  //   onError: (err) => {
-  //     if (err.data?.code === 'CONFLICT') {
-  //       toast.error(
-  //         'This email is already in use. Sign in instead?'
-  //       )
+  const { mutate, isLoading } = trpc.auth.createPayloadUser.useMutation({
+    // onError: (err) => {
+    //   if (err.data?.code === "CONFLICT") {
+    //     toast.error("This email is already in use. Sign in instead?");
 
-  //       return
-  //     }
+    //     return;
+    //   }
 
-  //     if (err instanceof ZodError) {
-  //       toast.error(err.issues[0].message)
+    //   if (err instanceof ZodError) {
+    //     toast.error(err.issues[0].message);
 
-  //       return
-  //     }
+    //     return;
+    //   }
 
-  //     toast.error(
-  //       'Something went wrong. Please try again.'
-  //     )
-  //   },
-  //   onSuccess: ({ sentToEmail }) => {
-  //     toast.success(
-  //       `Verification email sent to ${sentToEmail}.`
-  //     )
-  //     router.push('/verify-email?to=' + sentToEmail)
-  //   },
-  // })
+    //   toast.error("Something went wrong. Please try again.");
+    // },
+    // onSuccess: ({ sentToEmail }) => {
+    //   toast.success(`Verification email sent to ${sentToEmail}.`);
+    //   router.push("/verify-email?to=" + sentToEmail);
+    // },
+  });
 
   const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
-    // mutate({ email, password })
+    mutate({ email, password })
   };
 
   return (
